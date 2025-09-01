@@ -2,7 +2,7 @@ public class DecimalToBinaryRecursive {
     public static void main(String[] args) {
         System.out.println("Enter the number to change decimal to binary : ");
         Scanner amit = new Scanner(System.in);
-        int rows = amit.nextInt();
+        int decimal = amit.nextInt();
         System.out.print("Binary of " + decimal + " is: ");
         decimalToBinary(decimal);
     }
