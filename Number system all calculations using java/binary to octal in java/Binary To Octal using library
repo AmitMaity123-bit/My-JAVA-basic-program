@@ -1,0 +1,16 @@
+public class BinaryToOctal {
+    public static void main(String[] args) {
+        Scanner amit = new Scanner(System.in);
+        System.out.println("Enter a binary number to covert a octal number : ");
+        String binary = amit.nextLine(); 
+
+        // Step 1: Convert binary to decimal
+        int decimal = Integer.parseInt(binary, 2);
+
+        // Step 2: Convert decimal to octal
+        String octal = Integer.toOctalString(decimal);
+
+        System.out.println("Binary: " + binary);
+        System.out.println("Octal : " + octal);
+    }
+}
