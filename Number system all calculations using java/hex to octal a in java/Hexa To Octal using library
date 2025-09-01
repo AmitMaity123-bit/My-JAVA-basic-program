@@ -1,0 +1,16 @@
+public class HexToOctal {
+    public static void main(String[] args) {
+        Scanner amit = new Scanner(System.in);
+        System.out.println("Enter a hexadecimal number to covert a octal number : ");
+        String binary = amit.nextLine(); 
+
+        // Step 1: Convert hex to decimal
+        int decimal = Integer.parseInt(hex, 16);
+
+        // Step 2: Convert decimal to octal
+        String octal = Integer.toOctalString(decimal);
+
+        System.out.println("Hex   : " + hex);
+        System.out.println("Octal : " + octal);
+    }
+}
