@@ -1,0 +1,27 @@
+public class UnitMatrix {
+    public static void main(String[] args) {
+        int n = 4; // size of the matrix (4x4 unit matrix)
+
+        int[][] unitMatrix = new int[n][n];
+
+        // Fill matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == j) {
+                    unitMatrix[i][j] = 1; // diagonal element
+                } else {
+                    unitMatrix[i][j] = 0;
+                }
+            }
+        }
+
+        // Print the unit matrix
+        System.out.println("Unit Matrix of size " + n + "x" + n + ":");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(unitMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
