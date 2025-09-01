@@ -2,13 +2,13 @@ import java.util.Scanner;
 
 public class MatrixAddition {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner amit = new Scanner(System.in);
 
         // Input dimensions
         System.out.print("Enter number of rows: ");
-        int rows = sc.nextInt();
+        int rows = amit.nextInt();
         System.out.print("Enter number of columns: ");
-        int cols = sc.nextInt();
+        int cols = amit.nextInt();
 
         int[][] matrix1 = new int[rows][cols];
         int[][] matrix2 = new int[rows][cols];
@@ -46,6 +46,6 @@ public class MatrixAddition {
             System.out.println();
         }
 
-        sc.close();
+        amit.close();
     }
 }
