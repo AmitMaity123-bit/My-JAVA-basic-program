@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class NonFibonacciSeries {
+    public static void main(String[] args) {
+        Scanner amit = new Scanner(System.in);
+
+        System.out.print("Enter how many non-Fibonacci numbers to display: ");
+        int n = amit.nextInt();
+
+        int count = 0;
+        int a = 0, b = 1, c;
+
+        System.out.print("Non-Fibonacci Series: ");
+
+        while (count < n) {
+            c = a + b;
+
+            // Print numbers between (a, c) that are not Fibonacci
+            for (int i = a + 1; i < c && count < n; i++) {
+                System.out.print(i + " ");
+                count++;
+            }
+
+            // move to next Fibonacci numbers
+            a = b;
+            b = c;
+        }
+
+        amit.close();
+    }
+}
