@@ -1,0 +1,19 @@
+public class DecimalToHexManual {
+    public static void main(String[] args) {
+        System.out.println("Enter the number to change decimal to hexadecimal : ");
+        Scanner amit = new Scanner(System.in);
+        int decimal = amit.nextInt();
+        String hex = "";
+
+        int num = decimal;
+        char[] hexDigits = "0123456789ABCDEF".toCharArray();
+
+        while (num > 0) {
+            int remainder = num % 16;
+            hex = hexDigits[remainder] + hex;
+            num = num / 16;
+        }
+
+        System.out.println("Hexadecimal of " + decimal + " is: " + hex);
+    }
+}
