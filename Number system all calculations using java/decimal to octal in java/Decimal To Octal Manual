@@ -1,0 +1,17 @@
+public class DecimalToOctalManual {
+    public static void main(String[] args) {
+        System.out.println("Enter the number to change decimal to binary : ");
+        Scanner amit = new Scanner(System.in);
+        int decimal = amit.nextInt();
+        String octal = "";
+
+        int num = decimal;
+        while (num > 0) {
+            int remainder = num % 8;
+            octal = remainder + octal;
+            num = num / 8;
+        }
+
+        System.out.println("Octal of " + decimal + " is: " + octal);
+    }
+}
