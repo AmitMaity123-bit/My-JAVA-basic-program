@@ -1,0 +1,17 @@
+public class DecimalToBinaryManual {
+    public static void main(String[] args) {
+        System.out.println("Enter the number to change decimal to binary : ");
+        Scanner amit = new Scanner(System.in);
+        int rows = amit.nextInt();
+        String binary = "";
+
+        int num = decimal;
+        while (num > 0) {
+            int remainder = num % 2;
+            binary = remainder + binary;
+            num = num / 2;
+        }
+
+        System.out.println("Binary of " + decimal + " is: " + binary);
+    }
+}
