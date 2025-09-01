@@ -1,0 +1,9 @@
+public class DecimalToOctal {
+    public static void main(String[] args) {
+        System.out.println("Enter the number to change decimal to octal : ");
+        Scanner amit = new Scanner(System.in);
+        int decimal = amit.nextInt();
+        String octal = Integer.toOctalString(decimal);
+        System.out.println("Octal of " + decimal + " is: " + octal);
+    }
+}
