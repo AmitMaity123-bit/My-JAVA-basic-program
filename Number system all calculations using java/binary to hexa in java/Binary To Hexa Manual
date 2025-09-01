@@ -1,0 +1,27 @@
+public class BinaryToHexManual {
+    public static void main(String[] args) {
+        Scanner amit = new Scanner(System.in);
+        System.out.println("Enter a binary number to covert a hexadecimal number : ");
+        String binary = amit.nextLine(); 
+
+        // pad binary string length to multiple of 4
+        int len = binary.length();
+        int pad = (4 - (len % 4)) % 4;
+        for (int i = 0; i < pad; i++) {
+            binary = "0" + binary;
+        }
+
+        StringBuilder hex = new StringBuilder();
+        char[] hexDigits = "0123456789ABCDEF".toCharArray();
+
+        // process 4 bits at a time
+        for (int i = 0; i < binary.length(); i += 4) {
+            String fourBits = binary.substring(i, i + 4);
+            int value = Integer.parseInt(fourBits, 2);
+            hex.append(hexDigits[value]);
+        }
+
+        System.out.println("Binary: " + binary);
+        System.out.println("Hex   : " + hex.toString());
+    }
+}
