@@ -2,7 +2,7 @@ public class DecimalToBinaryManual {
     public static void main(String[] args) {
         System.out.println("Enter the number to change decimal to binary : ");
         Scanner amit = new Scanner(System.in);
-        int rows = amit.nextInt();
+        int decimal = amit.nextInt();
         String binary = "";
 
         int num = decimal;
