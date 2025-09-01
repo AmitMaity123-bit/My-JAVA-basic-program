@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class SkewSymmetricMatrix {
+    public static void main(String[] args) {
+        Scanner amit = new Scanner(System.in);
+
+        // Input size of square matrix
+        System.out.print("Enter the size of the square matrix (n): ");
+        int n = amit.nextInt();
+
+        int[][] matrix = new int[n][n];
+
+        // Input matrix elements
+        System.out.println("Enter the elements of the matrix:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = amit.nextInt();
+            }
+        }
+
+        // Display entered matrix
+        System.out.println("The entered matrix is:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        // Check skew-symmetric
+        if (isSkewSymmetric(matrix)) {
+            System.out.println("The matrix is skew-symmetric.");
+        } else {
+            System.out.println("The matrix is not skew-symmetric.");
+        }
+
+        amit.close();
+    }
+
+    // Method to check skew-symmetric
+    public static boolean isSkewSymmetric(int[][] matrix) {
+        int n = matrix.length;
+
+        // Check A[i][j] = -A[j][i]
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] != -matrix[j][i]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
