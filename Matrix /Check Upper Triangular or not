@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+public class UpperTriangularUserMatrix {
+    public static void main(String[] args) {
+        Scanner amit = new Scanner(System.in);
+
+        // Input size of matrix
+        System.out.print("Enter the size of the square matrix (n): ");
+        int n = amit.nextInt();
+
+        int[][] matrix = new int[n][n];
+
+        // Input elements
+        System.out.println("Enter the elements of the matrix:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = amit.nextInt();
+            }
+        }
+
+        // Display matrix
+        System.out.println("The entered matrix is:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        // Check upper triangular
+        if (isUpperTriangular(matrix)) {
+            System.out.println("The matrix is upper triangular.");
+        } else {
+            System.out.println("The matrix is not upper triangular.");
+        }
+
+        amit.close();
+    }
+
+    // Method to check if matrix is upper triangular
+    public static boolean isUpperTriangular(int[][] matrix) {
+        int n = matrix.length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) { // below diagonal
+                if (matrix[i][j] != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
