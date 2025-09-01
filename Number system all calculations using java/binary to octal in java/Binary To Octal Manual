@@ -1,0 +1,29 @@
+
+import java.util.Scanner;
+
+public class BinaryToOctalManual {
+    public static void main(String[] args) {
+        Scanner amit = new Scanner(System.in);
+        System.out.println("Enter a binary number to covert a octal number : ");
+        String binary = amit.nextLine(); 
+
+        // pad binary string length to multiple of 3
+        int len = binary.length();
+        int pad = (3 - (len % 3)) % 3;
+        for (int i = 0; i < pad; i++) {
+            binary = "0" + binary;
+        }
+
+        StringBuilder octal = new StringBuilder();
+
+        // process 3 bits at a time
+        for (int i = 0; i < binary.length(); i += 3) {
+            String threeBits = binary.substring(i, i + 3);
+            int value = Integer.parseInt(threeBits, 2);
+            octal.append(value);
+        }
+
+        System.out.println("Binary: " + binary);
+        System.out.println("Octal : " + octal.toString());
+    }
+}
