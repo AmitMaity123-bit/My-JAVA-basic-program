@@ -1,6 +1,6 @@
 public class DecimalToOctalRecursive {
     public static void main(String[] args) {
-        System.out.println("Enter the number to change decimal to binary : ");
+        System.out.println("Enter the number to change decimal to octal : ");
         Scanner amit = new Scanner(System.in);
         int decimal = amit.nextInt();
         System.out.print("Octal of " + decimal + " is: ");
