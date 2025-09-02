@@ -1,0 +1,192 @@
+import java.util.Scanner;
+
+class Node {
+    int cof;   // coefficient
+    int exp;   // exponent
+    Node link;
+
+    Node(int cof, int exp) {
+        this.cof = cof;
+        this.exp = exp;
+        this.link = null;
+    }
+}
+
+class Polynomial {
+    Node head = null;
+
+    // Insert term (combine like terms if exponent already exists)
+    void insertEnd(int cof, int exp) {
+        Node temp = head;
+
+        // Check if exponent already exists
+        while (temp != null) {
+            if (temp.exp == exp) {
+                temp.cof += cof;
+                return;
+            }
+            temp = temp.link;
+        }
+
+        Node newNode = new Node(cof, exp);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+
+        temp = head;
+        while (temp.link != null) {
+            temp = temp.link;
+        }
+        temp.link = newNode;
+    }
+
+    // Sort polynomial by exponent (descending order)
+    void sortList() {
+        if (head == null) return;
+
+        for (Node i = head; i != null; i = i.link) {
+            for (Node j = i.link; j != null; j = j.link) {
+                if (i.exp < j.exp) {
+                    // swap exponents and coefficients
+                    int tempExp = i.exp;
+                    int tempCof = i.cof;
+                    i.exp = j.exp;
+                    i.cof = j.cof;
+                    j.exp = tempExp;
+                    j.cof = tempCof;
+                }
+            }
+        }
+    }
+
+    // Print polynomial
+    void printList() {
+        Node ptr = head;
+        while (ptr != null) {
+            System.out.print(" " + ptr.cof + "x^" + ptr.exp + " ");
+            ptr = ptr.link;
+            if (ptr != null) System.out.print(" + ");
+        }
+        System.out.println();
+    }
+
+    // Add two polynomials and return a new Polynomial
+    static Polynomial add(Polynomial p1, Polynomial p2) {
+        Polynomial result = new Polynomial();
+        Node ptr1 = p1.head;
+        Node ptr2 = p2.head;
+
+        while (ptr1 != null && ptr2 != null) {
+            if (ptr1.exp == ptr2.exp) {
+                result.insertEnd(ptr1.cof + ptr2.cof, ptr1.exp);
+                ptr1 = ptr1.link;
+                ptr2 = ptr2.link;
+            } else if (ptr1.exp > ptr2.exp) {
+                result.insertEnd(ptr1.cof, ptr1.exp);
+                ptr1 = ptr1.link;
+            } else {
+                result.insertEnd(ptr2.cof, ptr2.exp);
+                ptr2 = ptr2.link;
+            }
+        }
+
+        while (ptr1 != null) {
+            result.insertEnd(ptr1.cof, ptr1.exp);
+            ptr1 = ptr1.link;
+        }
+
+        while (ptr2 != null) {
+            result.insertEnd(ptr2.cof, ptr2.exp);
+            ptr2 = ptr2.link;
+        }
+
+        return result;
+    }
+
+    // Validate if input is a number
+    static boolean isValidNumber(String str) {
+        if (str.length() == 0) return false;
+        if (str.charAt(0) == '-') str = str.substring(1);
+        for (char c : str.toCharArray()) {
+            if (!Character.isDigit(c)) return false;
+        }
+        return true;
+    }
+}
+
+public class PolynomialAddition {
+    public static void main(String[] args) {
+        Scanner amit = new Scanner(System.in);
+
+        Polynomial p1 = new Polynomial();
+        Polynomial p2 = new Polynomial();
+
+        System.out.println("Enter the first polynomial equation ------->");
+        while (true) {
+            System.out.print("Enter the coefficient (or 'e' to end): ");
+            String input = amit.next();
+
+            if (input.equalsIgnoreCase("e")) break;
+            if (!Polynomial.isValidNumber(input)) {
+                System.out.println("Invalid input! Only numbers allowed.");
+                continue;
+            }
+            int cof = Integer.parseInt(input);
+
+            System.out.print("Enter the exponent: ");
+            input = amit.next();
+            if (!Polynomial.isValidNumber(input)) {
+                System.out.println("Invalid input! Only numbers allowed.");
+                continue;
+            }
+            int exp = Integer.parseInt(input);
+
+            p1.insertEnd(cof, exp);
+        }
+
+        System.out.println("Enter the second polynomial equation ------->");
+        while (true) {
+            System.out.print("Enter the coefficient (or 'e' to end): ");
+            String input = amit.next();
+
+            if (input.equalsIgnoreCase("e")) break;
+            if (!Polynomial.isValidNumber(input)) {
+                System.out.println("Invalid input! Only numbers allowed.");
+                continue;
+            }
+            int cof = Integer.parseInt(input);
+
+            System.out.print("Enter the exponent: ");
+            input = amit.next();
+            if (!Polynomial.isValidNumber(input)) {
+                System.out.println("Invalid input! Only numbers allowed.");
+                continue;
+            }
+            int exp = Integer.parseInt(input);
+
+            p2.insertEnd(cof, exp);
+        }
+
+        System.out.print("\nFirst polynomial: ");
+        p1.printList();
+        System.out.print("Second polynomial: ");
+        p2.printList();
+
+        p1.sortList();
+        p2.sortList();
+
+        System.out.println("\nAfter sort:");
+        System.out.print("First polynomial: ");
+        p1.printList();
+        System.out.print("Second polynomial: ");
+        p2.printList();
+
+        Polynomial result = Polynomial.add(p1, p2);
+
+        System.out.println("\n\nThe addition result is --->");
+        result.printList();
+
+        amit.close();
+    }
+}
