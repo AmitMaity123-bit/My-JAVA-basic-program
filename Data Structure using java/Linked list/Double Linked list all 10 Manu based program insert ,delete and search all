@@ -1,0 +1,292 @@
+import java.util.Scanner;
+
+class DNode {
+    int data;
+    DNode prev, next;
+
+    DNode(int value) {
+        data = value;
+        prev = null;
+        next = null;
+    }
+}
+
+class DoublyLinkedList {
+    DNode head;
+
+    // 1. Insert at Beginning
+    void insertAtBeginning(int value) {
+        DNode newNode = new DNode(value);
+        if (head != null) {
+            newNode.next = head;
+            head.prev = newNode;
+        }
+        head = newNode;
+        System.out.println(value + " inserted at beginning.");
+    }
+
+    // 2. Insert at End
+    void insertAtEnd(int value) {
+        DNode newNode = new DNode(value);
+        if (head == null) {
+            head = newNode;
+            System.out.println(value + " inserted as the first node.");
+            return;
+        }
+        DNode temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = newNode;
+        newNode.prev = temp;
+        System.out.println(value + " inserted at end.");
+    }
+
+    // 3. Insert at Any Position (1-based index)
+    void insertAtPosition(int value, int pos) {
+        if (pos <= 0) {
+            System.out.println("Invalid position!");
+            return;
+        }
+        if (pos == 1) {
+            insertAtBeginning(value);
+            return;
+        }
+
+        DNode temp = head;
+        for (int i = 1; temp != null && i < pos - 1; i++) {
+            temp = temp.next;
+        }
+
+        if (temp == null) {
+            System.out.println("Position out of range.");
+            return;
+        }
+
+        DNode newNode = new DNode(value);
+        newNode.next = temp.next;
+        newNode.prev = temp;
+
+        if (temp.next != null) {
+            temp.next.prev = newNode;
+        }
+        temp.next = newNode;
+
+        System.out.println(value + " inserted at position " + pos);
+    }
+
+    // 4. Delete at Beginning
+    void deleteAtBeginning() {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+        System.out.println("Deleted node with value " + head.data);
+        head = head.next;
+        if (head != null) {
+            head.prev = null;
+        }
+    }
+
+    // 5. Delete at End
+    void deleteAtEnd() {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+        if (head.next == null) {
+            System.out.println("Deleted node with value " + head.data);
+            head = null;
+            return;
+        }
+        DNode temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        System.out.println("Deleted node with value " + temp.data);
+        temp.prev.next = null;
+    }
+
+    // 6. Delete at Any Position
+    void deleteAtPosition(int pos) {
+        if (pos <= 0 || head == null) {
+            System.out.println("Invalid position or empty list.");
+            return;
+        }
+        if (pos == 1) {
+            deleteAtBeginning();
+            return;
+        }
+
+        DNode temp = head;
+        for (int i = 1; temp != null && i < pos; i++) {
+            temp = temp.next;
+        }
+
+        if (temp == null) {
+            System.out.println("Position out of range.");
+            return;
+        }
+
+        System.out.println("Deleted node with value " + temp.data);
+
+        if (temp.prev != null) {
+            temp.prev.next = temp.next;
+        }
+        if (temp.next != null) {
+            temp.next.prev = temp.prev;
+        }
+    }
+
+    // 7. Delete by Value
+    void deleteByValue(int value) {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+        DNode temp = head;
+
+        while (temp != null && temp.data != value) {
+            temp = temp.next;
+        }
+
+        if (temp == null) {
+            System.out.println("Value " + value + " not found.");
+            return;
+        }
+
+        System.out.println("Deleted node with value " + value);
+
+        if (temp.prev != null) {
+            temp.prev.next = temp.next;
+        } else {
+            head = temp.next; // deleting head
+        }
+        if (temp.next != null) {
+            temp.next.prev = temp.prev;
+        }
+    }
+
+    // 8. Search for a Value (with position)
+    int search(int value) {
+        DNode temp = head;
+        int pos = 1;
+        while (temp != null) {
+            if (temp.data == value) {
+                return pos;
+            }
+            temp = temp.next;
+            pos++;
+        }
+        return -1;
+    }
+
+    // 9. Display Forward
+    void displayForward() {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+        DNode temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " <-> ");
+            temp = temp.next;
+        }
+        System.out.println("NULL");
+    }
+
+    // Extra: Display Backward
+    void displayBackward() {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+        DNode temp = head;
+        while (temp.next != null) { // go to last node
+            temp = temp.next;
+        }
+        while (temp != null) {
+            System.out.print(temp.data + " <-> ");
+            temp = temp.prev;
+        }
+        System.out.println("NULL");
+    }
+}
+
+public class DoublyLinkedListMain {
+    public static void main(String[] args) {
+        Scanner amit = new Scanner(System.in);
+        DoublyLinkedList list = new DoublyLinkedList();
+
+        while (true) {
+            System.out.println("\n--- Doubly Linked List Menu ---");
+            System.out.println("1. Insert at Beginning");
+            System.out.println("2. Insert at End");
+            System.out.println("3. Insert at Any Position");
+            System.out.println("4. Delete at Beginning");
+            System.out.println("5. Delete at End");
+            System.out.println("6. Delete at Any Position");
+            System.out.println("7. Delete by Value");
+            System.out.println("8. Search for a Value");
+            System.out.println("9. Display Forward");
+            System.out.println("10. Display Backward");
+            System.out.println("11. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = amit.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter value: ");
+                    list.insertAtBeginning(amit.nextInt());
+                    break;
+                case 2:
+                    System.out.print("Enter value: ");
+                    list.insertAtEnd(amit.nextInt());
+                    break;
+                case 3:
+                    System.out.print("Enter value: ");
+                    int val = amit.nextInt();
+                    System.out.print("Enter position: ");
+                    int pos = amit.nextInt();
+                    list.insertAtPosition(val, pos);
+                    break;
+                case 4:
+                    list.deleteAtBeginning();
+                    break;
+                case 5:
+                    list.deleteAtEnd();
+                    break;
+                case 6:
+                    System.out.print("Enter position: ");
+                    list.deleteAtPosition(amit.nextInt());
+                    break;
+                case 7:
+                    System.out.print("Enter value to delete: ");
+                    list.deleteByValue(amit.nextInt());
+                    break;
+                case 8:
+                    System.out.print("Enter value to search: ");
+                    int searchVal = amit.nextInt();
+                    int posFound = list.search(searchVal);
+                    if (posFound != -1) {
+                        System.out.println("The value " + searchVal + " is found in the list at position " + posFound + ".");
+                    } else {
+                        System.out.println("The value " + searchVal + " is not found in the list.");
+                    }
+                    break;
+                case 9:
+                    list.displayForward();
+                    break;
+                case 10:
+                    list.displayBackward();
+                    break;
+                case 11:
+                    System.out.println("Exiting...");
+                    amit.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice! Try again.");
+            }
+        }
+    }
+}
