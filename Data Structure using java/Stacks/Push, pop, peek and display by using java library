@@ -1,0 +1,63 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class StackDemo {
+    public static void main(String[] args) {
+        Scanner amit = new Scanner(System.in);
+        Stack<Integer> stack = new Stack<>();
+
+        int ch;
+        do {
+            System.out.println("\n*----------MAIN MENU-----------*");
+            System.out.println("ENTER 1 FOR PUSH");
+            System.out.println("ENTER 2 FOR POP");
+            System.out.println("ENTER 3 FOR PEEK");
+            System.out.println("ENTER 4 FOR DISPLAY");
+            System.out.println("ENTER 5 FOR EXIT");
+            System.out.print("Enter your choice: ");
+            ch = amit.nextInt();
+
+            switch (ch) {
+                case 1:
+                    System.out.print("Enter the number you want to push on stack: ");
+                    int item = amit.nextInt();
+                    stack.push(item);
+                    System.out.println("Pushed " + item + " into stack successfully.");
+                    break;
+
+                case 2:
+                    if (stack.isEmpty()) {
+                        System.out.println("Stack Underflow...");
+                    } else {
+                        System.out.println("Popped " + stack.pop() + " from stack.");
+                    }
+                    break;
+
+                case 3:
+                    if (stack.isEmpty()) {
+                        System.out.println("Stack is Empty.");
+                    } else {
+                        System.out.println("The value stored at the top of the stack is: " + stack.peek());
+                    }
+                    break;
+
+                case 4:
+                    if (stack.isEmpty()) {
+                        System.out.println("Stack is empty...");
+                    } else {
+                        System.out.println("Stack elements: " + stack);
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Exiting...");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice ... \nPlease Enter a valid choice...");
+            }
+        } while (ch != 5);
+
+        amit.close();
+    }
+}
