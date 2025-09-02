@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int value) {
+        data = value;
+        next = null;
+    }
+}
+
+public class LinkedListExample {
+    public static void main(String[] args) {
+        Scanner amit = new Scanner(System.in);
+
+        Node head = null;
+        Node temp = null;
+
+        System.out.print("Enter number of nodes: ");
+        int n = amit.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter value for node " + (i + 1) + ": ");
+            int value = amit.nextInt();
+
+            Node newNode = new Node(value);
+
+            if (head == null) {
+                head = newNode; // first node
+            } else {
+                temp.next = newNode; // link previous node
+            }
+            temp = newNode; // move temp to last node
+        }
+
+        // Print linked list
+        System.out.print("\nLinked List: ");
+        temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("NULL");
+
+        amit.close();
+    }
+}
