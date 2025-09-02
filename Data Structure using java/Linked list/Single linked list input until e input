@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int value) {
+        data = value;
+        next = null;
+    }
+}
+
+public class LinkedListInput {
+    public static void main(String[] args) {
+        Scanner amit = new Scanner(System.in);
+
+        Node start = null, temp = null;
+
+        System.out.println("Enter 'e' or 'E' to stop making nodes------->");
+
+        while (true) {
+            System.out.print("Enter the data of the node: ");
+            String input = amit.next();
+
+            if (input.equalsIgnoreCase("e")) { // stop condition
+                break;
+            }
+
+            int value;
+            try {
+                value = Integer.parseInt(input); // convert string to int (like atoi in C)
+            } catch (NumberFormatException ex) {
+                System.out.println("Invalid input! Please enter an integer or 'e' to exit.");
+                continue;
+            }
+
+            Node p = new Node(value);
+
+            if (start == null) {
+                start = p;
+                temp = p;
+            } else {
+                temp.next = p;
+                temp = p;
+            }
+        }
+
+        // Print linked list
+        System.out.println("\nElements in the linked list are:");
+        temp = start;
+        while (temp != null) {
+            System.out.print(temp.data + " -----> ");
+            temp = temp.next;
+        }
+        System.out.println("NULL");
+
+        amit.close();
+    }
+}
