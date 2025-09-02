@@ -1,0 +1,76 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node prev;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+class DoublyLinkedList {
+    Node head = null;
+    Node tail = null;  // keep track of last node
+
+    // Create list with n nodes
+    void create(int n, Scanner amit) {
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter value for node " + (i + 1) + ": ");
+            int value = amit.nextInt();
+
+            Node newNode = new Node(value);
+
+            if (head == null) {
+                head = newNode; // first node
+                tail = newNode;
+            } else {
+                tail.next = newNode; // link previous to new
+                newNode.prev = tail;
+                tail = newNode; // move tail to last node
+            }
+        }
+    }
+
+    // Print forward
+    void print() {
+        System.out.print("\nLinked List: ");
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("NULL");
+    }
+
+    // Print backward
+    void revPrint() {
+        System.out.print("Print Reverse List: ");
+        Node temp = tail; // start from last
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.prev;
+        }
+        System.out.println("NULL");
+    }
+}
+
+public class DLLDemo {
+    public static void main(String[] args) {
+        Scanner amit = new Scanner(System.in);
+        DoublyLinkedList dll = new DoublyLinkedList();
+
+        System.out.print("Enter number of nodes: ");
+        int n = amit.nextInt();
+
+        dll.create(n, amit);
+
+        dll.print();
+        dll.revPrint();
+
+        amit.close();
+    }
+}
